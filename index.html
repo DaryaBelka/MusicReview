@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Songs by Artist and Artist Reviews</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/app.js"></script>   
+</head>
+<body>
+    <!-- Główna sekcja (startowa) -->
+    <div id="main-section" class="main-section">
+        <h1>Witaj w aplikacji do dzielenia się opiniami o artystach, ich albumach i piosenkach!</h1>
+        <p>Co chcesz zrobić?</p>
+        <button onclick="showReviewsSection()">Dodaj opinię</button>
+        <button onclick="showSearchSection()">Wyszukaj najpopularniejsze piosenki artysty</button>
+
+        <!-- Dotychczasowe opinie w tabeli -->
+        <h2>Dotychczasowe opinie:</h2>
+        <table id="reviews-table">
+            <thead>
+                <tr>
+                    <th>Artysta</th>
+                    <th>Ocena</th>
+                    <th>Komentarz</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Opinie będą dodawane tutaj -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Sekcja opinii -->
+    <div id="reviews-section" class="reviews-section hidden">
+        <h2>Dodaj swoją opinię</h2>
+        <label for="track">Wybierz utwór lub album:</label>
+        <input type="text" id="track" placeholder="Wpisz nazwę utworu lub albumu" oninput="updatePreview()">
+    
+        <label for="rating">Twoja ocena:</label>
+        <select id="rating" onchange="updatePreview()">
+            <option value="" disabled selected>Wybierz ocenę</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+
+        <label for="comment">Twój komentarz:</label>
+        <textarea id="comment" placeholder="Podziel się swoimi wrażeniami..." rows="4" maxlength="500" oninput="updatePreview()"></textarea>
+        <p id="char-count">Pozostało znaków: 500</p>
+
+        <div class="checkbox-group">
+            <input type="checkbox" id="public-status" checked onchange="updatePreview()">
+            <label for="public-status">Publiczny</label>
+        </div>
+
+        <div class="preview">
+            <h3>Podgląd recenzji</h3>
+            <p><strong>Utwór:</strong> <span id="preview-track">Nie wybrano</span></p>
+            <p><strong>Ocena:</strong> <span id="preview-rating">Brak oceny</span></p>
+            <p><strong>Komentarz:</strong> <span id="preview-comment">Brak komentarza</span></p>
+            <p><strong>Status:</strong> <span id="preview-status">Publiczna</span></p>
+        </div>
+
+        <button onclick="addReview()">Dodaj recenzję</button>
+        <button onclick="showMainSection()">Powrót</button>
+    </div>
+
+    <!-- Sekcja wyszukiwania piosenek -->
+    <div id="search-section" class="search-section hidden">
+        <h2>Znajdź najpopularniejsze piosenki artysty</h2>
+        <form onsubmit="event.preventDefault(); searchArtist();">
+            <label for="artist_name">Wpisz nazwisko artysty:</label>
+            <input type="text" id="artist_name" name="artist_name" required>
+            <button type="submit">Szukaj</button>
+        </form>
+
+        <button onclick="showMainSection()">Powrót</button>
+
+        <div id="result"></div>
+    </div>
+
+</body>
+</html>
