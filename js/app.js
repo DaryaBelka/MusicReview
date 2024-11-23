@@ -68,7 +68,6 @@ function registerUser() {
         return;
     }
 
-    //localStorage 
     localStorage.setItem('username', username);
     localStorage.setItem('email', email);
     localStorage.setItem('password', password);
@@ -114,11 +113,17 @@ function addReview() {
         return;
     }
 
-    const table = document.getElementById("reviews-table");
-    const row = table.insertRow();
-    row.insertCell(0).textContent = artist;
-    row.insertCell(1).textContent = rating;
-    row.insertCell(2).textContent = comment;
+    const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+
+    const newReview = {
+        artist: artist,
+        rating: rating,
+        comment: comment
+    };
+
+    reviews.push(newReview);
+    localStorage.setItem('reviews', JSON.stringify(reviews));
+    displayReviews();
 
     document.getElementById("track").value = "";
     document.getElementById("rating").value = "";
@@ -141,7 +146,48 @@ function updatePreview() {
     document.getElementById("char-count").textContent = `Pozostało znaków: ${500 - comment.length}`;
 }
 
-document.addEventListener('DOMContentLoaded', updateUI);
+function displayReviews() {
+    const reviewsTable = document.getElementById("reviews-table");
+
+    const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+
+    reviewsTable.innerHTML = `
+        <thead>
+            <tr>
+                <th>Artyści</th>
+                <th>Ocena</th>
+                <th>Komentarz</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    `;
+
+    const tbody = reviewsTable.getElementsByTagName('tbody')[0];
+
+    reviews.forEach(review => {
+        const row = tbody.insertRow();
+        row.insertCell(0).textContent = review.artist;
+        row.insertCell(1).textContent = review.rating;
+        row.insertCell(2).textContent = review.comment;
+    });
+}
+
+function toggleSectionVisibility(hideSection, showSection) {
+    document.getElementById(hideSection).classList.add('hidden');
+    document.getElementById(showSection).classList.remove('hidden');
+}
+
+function toggleFormVisibility(showForm, hideForm, headerText) {
+    document.getElementById(hideForm).classList.add('hidden');
+    document.getElementById(showForm).classList.remove('hidden');
+    document.getElementById('auth-header').textContent = headerText;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    updateUI();
+    displayReviews(); 
+});
 
 async function searchArtist() {
     const artistName = document.getElementById("artist_name").value;
@@ -164,7 +210,6 @@ async function searchArtist() {
     }
 }
 
-// Spotify
 async function getAccessToken(clientId, clientSecret) {
     const authString = `${clientId}:${clientSecret}`;
     const authBase64 = btoa(authString);
@@ -187,7 +232,6 @@ async function getAccessToken(clientId, clientSecret) {
     }
 }
 
-// popularne piosenki
 async function getTopSongsByArtist(token, artistName) {
     const response = await fetch(`https://api.spotify.com/v1/search?q=${artistName}&type=artist&limit=1`, {
         method: 'GET',
@@ -219,15 +263,4 @@ function displaySongs(songs) {
     const resultDiv = document.getElementById("result");
     resultDiv.innerHTML = songs.length === 0 ? "Brak utworów dla tego artysty." :
         `<ul>${songs.map(song => `<li>${song}</li>`).join('')}</ul>`;
-}
-
-function toggleSectionVisibility(hideSection, showSection) {
-    document.getElementById(hideSection).classList.add('hidden');
-    document.getElementById(showSection).classList.remove('hidden');
-}
-
-function toggleFormVisibility(showForm, hideForm, headerText) {
-    document.getElementById(hideForm).classList.add('hidden');
-    document.getElementById(showForm).classList.remove('hidden');
-    document.getElementById('auth-header').textContent = headerText;
 }
