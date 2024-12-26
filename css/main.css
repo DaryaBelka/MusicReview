@@ -2,7 +2,7 @@
     display: none;
 }
 
-.main-section, .search-section, .reviews-section {
+* {
     text-align: center;
     margin-top: 50px;
 }

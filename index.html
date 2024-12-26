@@ -10,11 +10,15 @@
 </head>
 
 <body>
-    <div id="main-section" class="main-section">
+    <div id="welcome-section" class="welcome-section">
         <h1>Witaj w aplikacji do dzielenia się opiniami o artystach, ich albumach i piosenkach!</h1>
+        <button id="welcome-login-button" onclick="showAuthSection()">Zaloguj się</button>
+    </div>
+
+    <div id="main-section" class="main-section">
         <p>Co chcesz zrobić?</p>
         <button onclick="showReviewsSection()">Dodaj opinię</button>
-        <button onclick="showSearchSection()">Wyszukaj najpopularniejsze piosenki artysty</button>
+        <button onclick="showPlaylistSection()">Stwórz własną playlistę</button>
 
         <div class="auth-controls">
             <button id="auth-button" onclick="showAuthSection()">Zaloguj się / Zarejestruj się</button>
@@ -112,16 +116,44 @@
     </div>
 
     <!-- Sekcja wyszukiwania piosenek -->
-    <div id="search-section" class="search-section hidden">
-        <h2>Znajdź najpopularniejsze piosenki artysty</h2>
-        <form onsubmit="event.preventDefault(); searchArtist();">
-            <label for="artist_name">Wpisz nazwisko artysty:</label>
-            <input type="text" id="artist_name" name="artist_name" required>
-            <button type="submit">Szukaj</button>
+    <div id="playlist-section" class="playlist-section hidden">
+        <h1>Utwórz playlistę według gatunku na Spotify</h1>
+
+        <form id="playlist-form" onsubmit="event.preventDefault(); displaySongsByGenre();">
+            <label for="playlist-name">Nazwa playlisty:</label>
+            <input type="text" id="playlist-name" placeholder="Podaj nazwę playlisty"><br><br>
+
+            <label for="genre">Wybierz gatunek:</label>
+            <select id="genre">
+                <option value="pop">Pop</option>
+                <option value="rock">Rock</option>
+                <option value="jazz">Jazz</option>
+                <option value="hip-hop">Hip-hop</option>
+                <option value="classical">Klasyczna</option>
+                <option value="electronic">Elektroniczna</option>
+            </select><br><br>
+
+            <label for="mood">Wybierz nastrój:</label>
+            <select id="mood">
+                <option value="">Brak</option>
+                <option value="happy">Szczęśliwy</option>
+                <option value="sad">Smutny</option>
+                <option value="party">Imprezowy</option>
+                <option value="calm">Spokojny</option>
+                <option value="energetic">Energetyczny</option>
+            </select><br><br>
+
+            <label for="num-songs">Liczba piosenek:</label>
+            <input type="number" id="num-songs" min="1" max="50" required><br><br>
+
+            <button type="submit">Pokaż utwory</button>
         </form>
 
+        <button onclick="surpriseMe()">Zaskocz mnie!</button><br><br>
         <button onclick="showMainSection()">Powrót</button>
 
+        <h2>Twoja playlista:</h2>
+        <div id="playlist-name-display"></div>
         <div id="result"></div>
     </div>
 </body>

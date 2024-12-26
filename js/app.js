@@ -7,10 +7,8 @@ function showRegisterForm() {
     toggleFormVisibility('register-form', 'login-form', 'Zarejestruj się');
 }
 
-function showSearchSection() {
-    document.getElementById('artist_name').value = '';
-    document.getElementById('result').innerHTML = '';
-    toggleSectionVisibility('main-section', 'search-section');
+function showPlaylistSection() {
+    toggleSectionVisibility('main-section', 'playlist-section');
 }
 
 function showReviewsSection() {
@@ -18,9 +16,10 @@ function showReviewsSection() {
 }
 
 function showMainSection() {
-    toggleSectionVisibility('search-section', 'main-section');
+    toggleSectionVisibility('playlist-section', 'main-section');
     toggleSectionVisibility('reviews-section', 'main-section');
     toggleSectionVisibility('auth-section', 'main-section');
+    document.getElementById('welcome-section').classList.add('hidden');
 }
 
 function showAuthSection() {
@@ -83,20 +82,26 @@ function logout() {
     localStorage.removeItem('loggedIn');
     updateUI();
     clearAuthForms();
-    showMainSection();
+    showWelcomeSection();
 }
 
 function updateUI() {
     const username = localStorage.getItem('username');
     const isLoggedIn = localStorage.getItem('loggedIn') === 'true';
+    const welcomeSection = document.getElementById('welcome-section');
+    const mainSection = document.getElementById('main-section');
     const authButton = document.getElementById('auth-button');
     const logoutButton = document.getElementById('logout-button');
 
     if (isLoggedIn && username) {
+        welcomeSection.classList.add('hidden');
+        mainSection.classList.remove('hidden');
         authButton.textContent = `${username}`;
         authButton.onclick = null;
         logoutButton.style.display = 'inline-block';
     } else {
+        welcomeSection.classList.remove('hidden');
+        mainSection.classList.add('hidden');
         authButton.textContent = 'Zaloguj się / Zarejestruj się';
         authButton.onclick = showAuthSection;
         logoutButton.style.display = 'none';
@@ -189,27 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
     displayReviews(); 
 });
 
-async function searchArtist() {
-    const artistName = document.getElementById("artist_name").value;
-
-    if (!artistName) {
-        alert('Proszę wpisać nazwisko artysty.');
-        return;
-    }
-
-    const resultDiv = document.getElementById("result");
-    resultDiv.innerHTML = '';
-
-    const token = await getAccessToken("c79abbb42a6845408fc3559cd72de370", "bcc5aefb75344308ad50c79f8f4cab65");
-
-    if (token) {
-        const songs = await getTopSongsByArtist(token, artistName);
-        displaySongs(songs);
-    } else {
-        alert('Błąd autoryzacji Spotify.');
-    }
-}
-
+// Funkcja do uzyskania tokenu dostępu z API Spotify
 async function getAccessToken(clientId, clientSecret) {
     const authString = `${clientId}:${clientSecret}`;
     const authBase64 = btoa(authString);
@@ -227,40 +212,95 @@ async function getAccessToken(clientId, clientSecret) {
         const data = await response.json();
         return data.access_token;
     } else {
-        console.error('Ошибка при получении токена:', response.status);
+        console.error('Błąd podczas uzyskiwania tokenu:', response.status, response.statusText);
         return null;
     }
 }
 
-async function getTopSongsByArtist(token, artistName) {
-    const response = await fetch(`https://api.spotify.com/v1/search?q=${artistName}&type=artist&limit=1`, {
+// Funkcja do wyszukiwania utworów na podstawie gatunku i nastroju
+async function displaySongsByGenre() {
+    const genre = document.getElementById("genre").value;
+    const numSongs = parseInt(document.getElementById("num-songs").value);
+    const mood = document.getElementById("mood").value;
+    const playlistName = document.getElementById("playlist-name").value;
+
+    if (!genre || !numSongs || numSongs <= 0) {
+        alert('Proszę wybrać gatunek i liczbę piosenek.');
+        return;
+    }
+
+    const resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = '';  // Wyczyść poprzednią listę utworów
+
+    const token = await getAccessToken("c79abbb42a6845408fc3559cd72de370", "bcc5aefb75344308ad50c79f8f4cab65");
+
+    if (token) {
+        const songs = await getSongsByGenre(token, genre, numSongs, mood);
+        displayPlaylistName(playlistName);
+        displaySongs(songs);
+    } else {
+        alert('Błąd autoryzacji Spotify.');
+    }
+}
+
+// Funkcja do pobrania utworów na podstawie gatunku i nastroju
+async function getSongsByGenre(token, genre, numSongs, mood) {
+    const query = `genre:${genre}${mood ? ` mood:${mood}` : ''}`;
+    const response = await fetch(`https://api.spotify.com/v1/search?q=${query}&type=track&limit=${numSongs}`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`
         }
     });
 
-    const artistData = await response.json();
-    const artist = artistData.artists.items[0];
-
-    if (artist) {
-        const topTracksResponse = await fetch(`https://api.spotify.com/v1/artists/${artist.id}/top-tracks?country=US`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        });
-
-        const topTracksData = await topTracksResponse.json();
-        return topTracksData.tracks.map(track => track.name);
+    const data = await response.json();
+    if (data.tracks && data.tracks.items) {
+        return data.tracks.items.map(track => ({
+            name: track.name,
+            artists: track.artists.map(artist => artist.name).join(', '),
+            uri: track.uri
+        }));
     } else {
-        alert('Nie znaleziono artysty.');
+        alert('Brak utworów w tym gatunku.');
         return [];
     }
 }
 
+// Funkcja do wyświetlania nazwy playlisty
+function displayPlaylistName(name) {
+    const playlistNameDiv = document.getElementById("playlist-name-display");
+    if (name) {
+        playlistNameDiv.innerHTML = `<h3>Twoja playlista: ${name}</h3>`;
+    }
+}
+
+// Funkcja do wyświetlania utworów na stronie
 function displaySongs(songs) {
     const resultDiv = document.getElementById("result");
-    resultDiv.innerHTML = songs.length === 0 ? "Brak utworów dla tego artysty." :
-        `<ul>${songs.map(song => `<li>${song}</li>`).join('')}</ul>`;
+    if (songs.length === 0) {
+        resultDiv.innerHTML = "Brak utworów do wyświetlenia.";
+    } else {
+        resultDiv.innerHTML = `<ul>${songs.map(song => `<li><a href="https://open.spotify.com/track/${song.uri.split(":")[2]}" target="_blank">${song.name} - ${song.artists}</a></li>`).join('')}</ul>`;
+    }
 }
+
+// Funkcja do generowania losowej playlisty
+function surpriseMe() {
+    const genres = ['pop', 'rock', 'jazz', 'hip-hop', 'classical', 'electronic'];
+    const randomGenre = genres[Math.floor(Math.random() * genres.length)];
+
+    const moods = ['', 'happy', 'sad', 'party', 'calm', 'energetic'];
+    const randomMood = moods[Math.floor(Math.random() * moods.length)];
+
+    const randomNumSongs = Math.floor(Math.random() * 10) + 1;
+
+    document.getElementById("genre").value = randomGenre;
+    document.getElementById("mood").value = randomMood;
+    document.getElementById("num-songs").value = randomNumSongs;
+
+    displaySongsByGenre();
+}
+
+
+
+
