@@ -154,7 +154,37 @@ function updatePreview() {
 function displayReviews() {
     const reviewsTable = document.getElementById("reviews-table");
 
-    const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+    const predefinedReviews = [
+        { artist: "Taylor Swift", rating: "9", comment: "Fantastyczna artystka z niezapomnianymi tekstami!" },
+        { artist: "Drake", rating: "8", comment: "Świetny flow i zawsze trafione hity." },
+        { artist: "Adele", rating: "10", comment: "Jej głos dotyka duszy. Arcydzieła!" },
+        { artist: "Ed Sheeran", rating: "9", comment: "Niesamowity talent i świetne piosenki." },
+        { artist: "Beyoncé", rating: "10", comment: "Królowa! Nic dodać, nic ująć." },
+        { artist: "The Weeknd", rating: "8", comment: "Unikalny styl i klimat." },
+        { artist: "Billie Eilish", rating: "9", comment: "Mroczna i niezwykle oryginalna." },
+        { artist: "Coldplay", rating: "10", comment: "Zawsze pełni emocji i magii." },
+        { artist: "Bruno Mars", rating: "9", comment: "Jego energia jest zaraźliwa!" },
+        { artist: "Rihanna", rating: "9", comment: "Niepowtarzalna i zawsze na czasie." },
+        { artist: "Harry Styles", rating: "9", comment: "Stylowy, kreatywny i zawsze pełen wdzięku." },
+        { artist: "Lady Gaga", rating: "10", comment: "Ikona, która łączy talent z odwagą artystyczną." },
+        { artist: "Sam Smith", rating: "9", comment: "Jego głos to czysta magia." },
+        { artist: "Shawn Mendes", rating: "8", comment: "Młody talent z ogromnym potencjałem." },
+        { artist: "Dua Lipa", rating: "9", comment: "Jej rytmy zawsze zachęcają do tańca." },
+        { artist: "Justin Bieber", rating: "8", comment: "Ewoluuje jako artysta, zawsze zaskakuje." },
+        { artist: "Ariana Grande", rating: "10", comment: "Głos jak anioł i charyzma na scenie." },
+        { artist: "Taylor Swift", rating: "10", comment: "Niezrównana w pisaniu emocjonalnych tekstów." },
+        { artist: "Post Malone", rating: "8", comment: "Unikalny styl i niezapomniane hity." },
+        { artist: "Selena Gomez", rating: "9", comment: "Delikatna, ale pełna mocy." },
+        { artist: "Katy Perry", rating: "8", comment: "Zawsze wprowadza radość i energię." },
+        { artist: "Lizzo", rating: "9", comment: "Inspirująca i pełna pozytywnej energii." },
+        { artist: "Imagine Dragons", rating: "10", comment: "Ich muzyka dodaje siły i inspiracji." },
+        { artist: "The Chainsmokers", rating: "8", comment: "Zawsze z nowoczesnym brzmieniem." },
+        { artist: "Camila Cabello", rating: "9", comment: "Jej piosenki są pełne pasji i emocji." }
+    ];
+
+    const userReviews = JSON.parse(localStorage.getItem('reviews')) || [];
+
+    const allReviews = [...predefinedReviews, ...userReviews];
 
     reviewsTable.innerHTML = `
         <thead>
@@ -170,13 +200,14 @@ function displayReviews() {
 
     const tbody = reviewsTable.getElementsByTagName('tbody')[0];
 
-    reviews.forEach(review => {
+    allReviews.forEach(review => {
         const row = tbody.insertRow();
         row.insertCell(0).textContent = review.artist;
         row.insertCell(1).textContent = review.rating;
         row.insertCell(2).textContent = review.comment;
     });
 }
+
 
 function toggleSectionVisibility(hideSection, showSection) {
     document.getElementById(hideSection).classList.add('hidden');
