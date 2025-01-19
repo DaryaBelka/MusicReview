@@ -1,0 +1,134 @@
+$background-gradient: linear-gradient(to bottom, #f8f5f1, #eae4df); 
+$text-color: #4a4a4a; 
+$heading-color: #6b4e31; 
+$button-color: #d1bfa8; 
+$button-hover-color: #bfa892;
+$button-shadow-color: rgba(0, 0, 0, 0.2); 
+$section-bg: #ffffff; 
+$section-border: #ddd; 
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: $background-gradient;
+  color: $text-color;
+  margin: 0;
+  padding: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background-color: $button-color;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px $button-shadow-color;
+
+  &:hover {
+    background-color: $button-hover-color;
+    box-shadow: 0 6px 10px $button-shadow-color;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 10px $button-hover-color;
+  }
+}
+
+h1,
+h2 {
+  text-align: center;
+  color: $heading-color;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-top: 50px;
+}
+
+h2 {
+  font-size: 2rem;
+  margin: 20px 0;
+}
+
+#welcome-section {
+  padding: 80px 20px;
+  text-align: center;
+  background-color: transparent;
+
+  h1 {
+    margin-bottom: 20px;
+  }
+
+  button {
+    margin-top: 20px;
+  }
+}
+
+#main-section,
+#auth-section,
+#reviews-section,
+#playlist-section {
+  padding: 40px;
+  margin: 30px auto;
+  max-width: 800px;
+  background-color: $section-bg;
+  border-radius: 10px;
+  border: 1px solid $section-border;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  h2 {
+    margin-bottom: 20px;
+  }
+}
+
+table {
+  width: 100%;
+  margin: 20px 0;
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: 12px;
+    border: 1px solid $section-border;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2ede8;
+    color: $text-color;
+    font-weight: bold;
+  }
+
+  td {
+    background-color: #ffffff;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: $heading-color;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+
+  button {
+    width: 30%;
+  }
+}

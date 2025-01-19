@@ -23,9 +23,13 @@ function showMainSection() {
 }
 
 function showAuthSection() {
+    document.getElementById('welcome-login-button').classList.add('hidden');
+
     toggleSectionVisibility('main-section', 'auth-section');
+
     showLoginForm();
 }
+
 
 function clearAuthForms() {
     document.getElementById('login-username').value = '';
@@ -96,17 +100,18 @@ function updateUI() {
     if (isLoggedIn && username) {
         welcomeSection.classList.add('hidden');
         mainSection.classList.remove('hidden');
-        authButton.textContent = `${username}`;
-        authButton.onclick = null;
+        authButton.style.display = 'none';
         logoutButton.style.display = 'inline-block';
     } else {
         welcomeSection.classList.remove('hidden');
         mainSection.classList.add('hidden');
+        authButton.style.display = 'inline-block';
         authButton.textContent = 'Zaloguj się / Zarejestruj się';
         authButton.onclick = showAuthSection;
         logoutButton.style.display = 'none';
     }
 }
+
 
 function addReview() {
     const artist = document.getElementById("track").value;
