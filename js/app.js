@@ -7,6 +7,11 @@ function showRegisterForm() {
     toggleFormVisibility('register-form', 'login-form', 'Zarejestruj się');
 }
 
+function showWelcomeSection() {
+    toggleSectionVisibility('auth-section', 'welcome-section');
+    document.getElementById('welcome-login-button').classList.remove('hidden');
+}
+
 function showPlaylistSection() {
     toggleSectionVisibility('main-section', 'playlist-section');
 }
@@ -22,6 +27,10 @@ function showMainSection() {
     document.getElementById('welcome-section').classList.add('hidden');
 }
 
+function showPlaylistSection() {
+    toggleSectionVisibility('main-section', 'playlist-section');
+}
+
 function showAuthSection() {
     document.getElementById('welcome-login-button').classList.add('hidden');
 
@@ -30,6 +39,15 @@ function showAuthSection() {
     showLoginForm();
 }
 
+function showPlaylist() {
+    toggleFormVisibility('playlist-container', 'main-section', 'Twoja playlista:');
+    document.getElementById('playlist-name-display').textContent = playlistName;
+}
+
+function handleSurpriseAndShowPlaylist() {
+    surpriseMe();
+    showPlaylist(); 
+}
 
 function clearAuthForms() {
     document.getElementById('login-username').value = '';
@@ -50,7 +68,7 @@ function loginUser() {
     const storedPassword = localStorage.getItem('password');
 
     if (username === storedUsername && password === storedPassword) {
-        alert('Zalogowano pomyślnie!');
+        // alert('Zalogowano pomyślnie!');
         localStorage.setItem('loggedIn', 'true');
         updateUI();
         clearAuthForms();

@@ -1,4 +1,4 @@
-$background-gradient: linear-gradient(to bottom, #f8f5f1, #eae4df); 
+$background-gradient: linear-gradient(to right, #dfb885, #eae4df);
 $text-color: #4a4a4a; 
 $heading-color: #6b4e31; 
 $button-color: #d1bfa8; 
@@ -60,7 +60,7 @@ h2 {
 }
 
 #welcome-section {
-  padding: 80px 20px;
+  padding: 10px 20px;
   text-align: center;
   background-color: transparent;
 
@@ -131,4 +131,417 @@ a {
   button {
     width: 30%;
   }
+}
+
+
+// Gallery Styles
+.gallery {
+  display: flex;
+  gap: 10px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1200px;
+  perspective: 1000px;
+}
+
+// Card Styles
+.card {
+  flex: 1;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  transition: flex 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    flex: 3;
+    transform: scale(1.1);
+    filter: brightness(1.2);
+    z-index: 10;
+
+    span {
+      opacity: 1;
+    }
+  }
+
+  &:not(:hover) {
+    filter: brightness(0.5);
+    transition: filter 0.3s ease;
+  }
+
+  span {
+    position: absolute;
+    bottom: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+}
+
+// Login Form Styles
+#login-form {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.612);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  margin-bottom: 30px;
+
+  label {
+    font-size: 14px;
+    color: #333;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #dfb885;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #d69e5b;
+    }
+  }
+
+  p {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+  }
+
+  a {
+    color: #dfb885;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+#register-form {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.612);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  margin-bottom: 30px;
+  display: none;
+}
+
+#register-form label {
+  font-size: 14px;
+  color: #333;
+}
+
+#register-form input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+#register-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #dfb885;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#register-form button:hover {
+  background-color: #d69e5b;
+}
+
+#register-form p {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}
+
+#register-form a {
+  color: #dfb885;
+  text-decoration: none;
+}
+
+#register-form a:hover {
+  text-decoration: underline;
+}
+
+
+#register-form li {
+  padding: 8px;
+  background-color: #f0ece9;
+  border: 1px solid #d3c6b6;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  color: #4b3c2f;
+}
+
+#reviews-section {
+  padding: 40px;
+  margin: 30px auto;
+  max-width: 800px;
+  background-color: $section-bg;
+  border-radius: 10px;
+  border: 1px solid $section-border;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+
+  h2 {
+    margin-bottom: 20px;
+    color: $heading-color;
+  }
+
+  label {
+    font-size: 16px;
+    color: $text-color;
+    display: block;
+    margin: 15px 0 5px;
+    text-align: left;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    color: $text-color;
+    background-color: #fff;
+
+    &:focus {
+      border-color: $button-color;
+      outline: none;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  .checkbox-group {
+    margin: 10px 0;
+    display: flex;  
+    align-items: center; 
+
+    input {
+      margin-right: 5px;
+    }
+
+    label {
+      font-size: 14px;
+      color: $text-color;
+    }
+  }
+
+  .preview {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: #f0ece9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    h3 {
+      font-size: 1.5rem;
+      color: $heading-color;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 14px;
+      color: $text-color;
+
+      strong {
+        font-weight: bold;
+      }
+
+      span {
+        color: $heading-color;
+      }
+    }
+  }
+
+  #char-count {
+    font-size: 14px;
+    color: #666;
+  }
+
+  button {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    background-color: $button-color;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px $button-shadow-color;
+    margin-top: 20px;
+    width: 100%;
+    width: 200px;
+
+    &:hover {
+      background-color: $button-hover-color;
+      box-shadow: 0 6px 10px $button-shadow-color;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 10px $button-hover-color;
+    }
+  }
+
+  button:nth-child(2) {
+    background-color: transparent;
+    color: $heading-color;
+    margin-top: 10px;
+    box-shadow: none;
+
+    &:hover {
+      background-color: #f1f1f1;
+    }
+  }
+}
+
+
+#playlist-form {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f0ece9;
+  border-radius: 8px;
+  border: 1px solid #d3c6b6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 600px; 
+  margin-left: auto;
+  margin-right: auto; 
+  text-align: center; 
+
+  label {
+    font-size: 16px;
+    color: #4b3c2f;
+    display: block;
+    margin: 15px 0 5px;
+    text-align: left;
+  }
+
+  input,
+  select {
+    width: 100%;
+    padding: 12px; 
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #d3c6b6;
+    font-size: 14px;
+    color: #4b3c2f; 
+    background-color: #fff;
+    box-sizing: border-box; 
+  }
+
+  input:focus,
+  select:focus {
+    border-color: #d8cfc4; 
+    outline: none;
+  }
+
+  button {
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    background-color: #d8cfc4; 
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    width: 100%;
+    max-width: 200px; 
+  }
+
+  button:hover {
+    background-color: #bfa78d;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  button:focus {
+    outline: none;
+    box-shadow: 0 0 10px #bfa78d;
+  }
+}
+
+#playlist-section button {
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background-color: $button-color;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px 0px;
+}
+
+#result {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f0ece9;
+  border: 1px solid #d3c6b6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  color: #4b3c2f;
+  line-height: 1.5; 
+  max-width: 600px; 
+  margin-left: auto;
+  margin-right: auto;
+  overflow-y: auto; 
+  max-height: 300px;
+}
+
+#result ul {
+  list-style-type: none;  
 }

@@ -1,6 +1,6 @@
 body {
   font-family: "Arial", sans-serif;
-  background: linear-gradient(to bottom, #f8f5f1, #eae4df);
+  background: linear-gradient(to right, #dfb885, #eae4df);
   color: #4a4a4a;
   margin: 0;
   padding: 0;
@@ -49,7 +49,7 @@ h2 {
 }
 
 #welcome-section {
-  padding: 80px 20px;
+  padding: 10px 20px;
   text-align: center;
   background-color: transparent;
 }
@@ -115,6 +115,378 @@ a:hover {
 }
 .navigation button {
   width: 30%;
+}
+
+.gallery {
+  display: flex;
+  gap: 10px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1200px;
+  perspective: 1000px;
+}
+
+.card {
+  flex: 1;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  transition: flex 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  cursor: pointer;
+}
+.card:hover {
+  flex: 3;
+  transform: scale(1.1);
+  filter: brightness(1.2);
+  z-index: 10;
+}
+.card:hover span {
+  opacity: 1;
+}
+.card:not(:hover) {
+  filter: brightness(0.5);
+  transition: filter 0.3s ease;
+}
+.card span {
+  position: absolute;
+  bottom: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#login-form {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.612);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  margin-bottom: 30px;
+}
+#login-form label {
+  font-size: 14px;
+  color: #333;
+}
+#login-form input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+#login-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #dfb885;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+#login-form button:hover {
+  background-color: #d69e5b;
+}
+#login-form p {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}
+#login-form a {
+  color: #dfb885;
+  text-decoration: none;
+}
+#login-form a:hover {
+  text-decoration: underline;
+}
+
+#register-form {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.612);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  margin-bottom: 30px;
+  display: none;
+}
+
+#register-form label {
+  font-size: 14px;
+  color: #333;
+}
+
+#register-form input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+#register-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #dfb885;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#register-form button:hover {
+  background-color: #d69e5b;
+}
+
+#register-form p {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}
+
+#register-form a {
+  color: #dfb885;
+  text-decoration: none;
+}
+
+#register-form a:hover {
+  text-decoration: underline;
+}
+
+#register-form li {
+  padding: 8px;
+  background-color: #f0ece9;
+  border: 1px solid #d3c6b6;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  color: #4b3c2f;
+}
+
+#reviews-section {
+  padding: 40px;
+  margin: 30px auto;
+  max-width: 800px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+#reviews-section h2 {
+  margin-bottom: 20px;
+  color: #6b4e31;
+}
+#reviews-section label {
+  font-size: 16px;
+  color: #4a4a4a;
+  display: block;
+  margin: 15px 0 5px;
+  text-align: left;
+}
+#reviews-section input,
+#reviews-section select,
+#reviews-section textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  color: #4a4a4a;
+  background-color: #fff;
+}
+#reviews-section input:focus,
+#reviews-section select:focus,
+#reviews-section textarea:focus {
+  border-color: #d1bfa8;
+  outline: none;
+}
+#reviews-section textarea {
+  resize: vertical;
+}
+#reviews-section .checkbox-group {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+}
+#reviews-section .checkbox-group input {
+  margin-right: 5px;
+}
+#reviews-section .checkbox-group label {
+  font-size: 14px;
+  color: #4a4a4a;
+}
+#reviews-section .preview {
+  margin-top: 30px;
+  padding: 15px;
+  background-color: #f0ece9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+#reviews-section .preview h3 {
+  font-size: 1.5rem;
+  color: #6b4e31;
+  margin-bottom: 20px;
+}
+#reviews-section .preview p {
+  font-size: 14px;
+  color: #4a4a4a;
+}
+#reviews-section .preview p strong {
+  font-weight: bold;
+}
+#reviews-section .preview p span {
+  color: #6b4e31;
+}
+#reviews-section #char-count {
+  font-size: 14px;
+  color: #666;
+}
+#reviews-section button {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background-color: #d1bfa8;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  margin-top: 20px;
+  width: 100%;
+  width: 200px;
+}
+#reviews-section button:hover {
+  background-color: #bfa892;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+#reviews-section button:focus {
+  outline: none;
+  box-shadow: 0 0 10px #bfa892;
+}
+#reviews-section button:nth-child(2) {
+  background-color: transparent;
+  color: #6b4e31;
+  margin-top: 10px;
+  box-shadow: none;
+}
+#reviews-section button:nth-child(2):hover {
+  background-color: #f1f1f1;
+}
+
+#playlist-form {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f0ece9;
+  border-radius: 8px;
+  border: 1px solid #d3c6b6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+#playlist-form label {
+  font-size: 16px;
+  color: #4b3c2f;
+  display: block;
+  margin: 15px 0 5px;
+  text-align: left;
+}
+#playlist-form input,
+#playlist-form select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #d3c6b6;
+  font-size: 14px;
+  color: #4b3c2f;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+#playlist-form input:focus,
+#playlist-form select:focus {
+  border-color: #d8cfc4;
+  outline: none;
+}
+#playlist-form button {
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background-color: #d8cfc4;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  width: 100%;
+  max-width: 200px;
+}
+#playlist-form button:hover {
+  background-color: #bfa78d;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+}
+#playlist-form button:focus {
+  outline: none;
+  box-shadow: 0 0 10px #bfa78d;
+}
+
+#playlist-section button {
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background-color: #d1bfa8;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px 0px;
+}
+
+#result {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f0ece9;
+  border: 1px solid #d3c6b6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  color: #4b3c2f;
+  line-height: 1.5;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-y: auto;
+  max-height: 300px;
+}
+
+#result ul {
+  list-style-type: none;
 }
 
 /*# sourceMappingURL=main.css.map */

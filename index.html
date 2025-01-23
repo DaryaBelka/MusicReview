@@ -12,6 +12,26 @@
 <body>
     <div id="welcome-section" class="welcome-section">
         <h1>Witaj w aplikacji do dzielenia się opiniami o artystach, ich albumach i piosenkach!</h1>
+        <div class="gallery">
+            <div class="card" style="background-image: url('images/swift.webp');">
+                <span>Taylor Swift</span>
+            </div>
+            <div class="card" style="background-image: url('images/the_weeknd.png');">
+                <span>The Weeknd</span>
+            </div>
+            <div class="card" style="background-image: url('images/bad_bunny.webp');">
+                <span>Bad Bunny</span>
+            </div>
+            <div class="card" style="background-image: url('images/drake.jpg');">
+                <span>Drake</span>
+            </div>
+            <div class="card" style="background-image: url('images/billie_eilish.webp');">
+                <span>Billie Eilish</span>
+            </div>
+            <div class="card" style="background-image: url('images/ed_sheeran.png');">
+                <span>Ed Sheeran</span>
+            </div>
+        </div>
         <button id="welcome-login-button" onclick="showAuthSection()">Zaloguj się</button>
     </div>
 
@@ -19,10 +39,10 @@
         <p>Co chcesz zrobić?</p>
         <button onclick="showReviewsSection()">Dodaj opinię</button>
         <button onclick="showPlaylistSection()">Stwórz własną playlistę</button>
-
+        <button id="logout-button" class="hidden" onclick="logout()">Wyloguj się</button>
+        
         <div class="auth-controls">
-            <button id="auth-button" onclick="showAuthSection()">Zaloguj się / Zarejestruj się</button>
-            <button id="logout-button" class="hidden" onclick="logout()">Wyloguj się</button>
+            <button id="auth-button" onclick="showAuthSection()">Zaloguj się / Zarejestruj się</button><br>
         </div>
 
         <!-- Dotychczasowe opinie w tabeli -->
@@ -69,7 +89,7 @@
 
             <p>Masz już konto? <a href="#" onclick="showLoginForm()">Zaloguj się</a></p>
         </div>
-        <button onclick="showMainSection()">Powrót</button>
+        <button onclick="showWelcomeSection()">Powrót</button>
     </div>
 
     <!-- Sekcja dodawania opinii -->
@@ -105,7 +125,7 @@
 
         <div class="preview">
             <h3>Podgląd recenzji</h3>
-            <p><strong>Utwór:</strong> <span id="preview-track">Nie wybrano</span></p>
+            <p><strong>Artysta/Utwór:</strong> <span id="preview-track">Nie wybrano</span></p>
             <p><strong>Ocena:</strong> <span id="preview-rating">Brak oceny</span></p>
             <p><strong>Komentarz:</strong> <span id="preview-comment">Brak komentarza</span></p>
             <p><strong>Status:</strong> <span id="preview-status">Publiczna</span></p>
@@ -117,7 +137,7 @@
 
     <!-- Sekcja wyszukiwania piosenek -->
     <div id="playlist-section" class="playlist-section hidden">
-        <h1>Utwórz playlistę według gatunku na Spotify</h1>
+        <h1>Utwórz własną playlistę</h1>
 
         <form id="playlist-form" onsubmit="event.preventDefault(); displaySongsByGenre();">
             <label for="playlist-name">Nazwa playlisty:</label>
@@ -146,15 +166,16 @@
             <label for="num-songs">Liczba piosenek:</label>
             <input type="number" id="num-songs" min="1" max="50" required><br><br>
 
-            <button type="submit">Pokaż utwory</button>
+            <button type="submit" onclick="showPlaylist()">Pokaż utwory</button>
         </form>
 
-        <button onclick="surpriseMe()">Zaskocz mnie!</button><br><br>
+        <button onclick="handleSurpriseAndShowPlaylist()">Zaskocz mnie!</button><br>
         <button onclick="showMainSection()">Powrót</button>
 
-        <h2>Twoja playlista:</h2>
-        <div id="playlist-name-display"></div>
-        <div id="result"></div>
+        <div id="playlist-container" class="hidden">
+            <div id="playlist-name-display"></div>
+            <div id="result"></div>
+        </div>
     </div>
 </body>
 
