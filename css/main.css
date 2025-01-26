@@ -60,6 +60,82 @@ h2 {
   margin-top: 20px;
 }
 
+#login-form,
+#register-form {
+  margin-top: 20px;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  color: #4a4a4a;
+}
+
+#login-form h2,
+#register-form h2 {
+  font-size: 24px;
+  color: #6b4e31;
+  font-weight: bold;
+}
+
+#login-form label,
+#register-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: normal;
+  color: #4a4a4a;
+}
+
+#login-form input,
+#register-form input {
+  width: 100%;
+  max-width: 300px;
+  padding: 8px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  color: #4a4a4a;
+  font-family: "Roboto", sans-serif;
+}
+
+#login-form input:focus,
+#register-form input:focus {
+  border-color: #d1bfa8;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  outline: none;
+}
+
+#login-form button,
+#register-form button {
+  width: 100%;
+  max-width: 150px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #d1bfa8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#login-form button:hover,
+#register-form button:hover {
+  background-color: #bfa892;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.auth-container {
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 400px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
 #main-section,
 #auth-section,
 #reviews-section,
@@ -119,11 +195,13 @@ a:hover {
 
 .gallery {
   display: flex;
+  justify-content: center;
   gap: 10px;
   overflow: hidden;
   width: 100%;
   max-width: 1200px;
   perspective: 1000px;
+  margin: 0 auto;
 }
 
 .card {
@@ -159,129 +237,6 @@ a:hover {
   font-weight: bold;
   opacity: 0;
   transition: opacity 0.3s ease;
-}
-
-#login-form {
-  width: 300px;
-  margin: 0 auto;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.612);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: Arial, sans-serif;
-  margin-bottom: 30px;
-}
-#login-form label {
-  font-size: 14px;
-  color: #333;
-}
-#login-form input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
-}
-#login-form button {
-  width: 100%;
-  padding: 10px;
-  background-color: #dfb885;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-}
-#login-form button:hover {
-  background-color: #d69e5b;
-}
-#login-form p {
-  text-align: center;
-  font-size: 14px;
-  color: #666;
-}
-#login-form a {
-  color: #dfb885;
-  text-decoration: none;
-}
-#login-form a:hover {
-  text-decoration: underline;
-}
-
-#register-form {
-  width: 300px;
-  margin: 0 auto;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.612);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: Arial, sans-serif;
-  margin-bottom: 30px;
-  display: none;
-}
-
-#register-form label {
-  font-size: 14px;
-  color: #333;
-}
-
-#register-form input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
-#register-form button {
-  width: 100%;
-  padding: 10px;
-  background-color: #dfb885;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-#register-form button:hover {
-  background-color: #d69e5b;
-}
-
-#register-form p {
-  text-align: center;
-  font-size: 14px;
-  color: #666;
-}
-
-#register-form a {
-  color: #dfb885;
-  text-decoration: none;
-}
-
-#register-form a:hover {
-  text-decoration: underline;
-}
-
-#register-form li {
-  padding: 8px;
-  background-color: #f0ece9;
-  border: 1px solid #d3c6b6;
-  margin-bottom: 8px;
-  border-radius: 5px;
-  color: #4b3c2f;
 }
 
 #reviews-section {
